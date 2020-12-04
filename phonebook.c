@@ -54,10 +54,8 @@ Contact* getContactsArray(const char* fileName) {
         exit(1);
     }
     Contact* contactsArray = (Contact*) malloc(sizeof(Contact) * rows);
-    printf("%d\n", rows);
     for (int i = 0; i < rows; ++i) {
         fread(contactsArray + i, sizeof(Contact), 1, file);
-        printf("%s %s\n", contactsArray[i].name, contactsArray[i].number);
     }
     fclose(file);
     return contactsArray;
