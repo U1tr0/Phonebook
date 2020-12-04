@@ -1,17 +1,21 @@
-#ifndef PHONE_DATA_BASE
-#define PHONE_DATA_BASE 
+#ifndef PHONEBOOK
+#define PHONEBOOK 
+
+#define NameBufferSize 30
+#define NumberBufferSize 20
 
 typedef struct {
-    char* phoneNumber;
-    char* name;
+    char name[NameBufferSize];
+    char number[NumberBufferSize];
 } Contact;
 
-void addContact(File* file, char* phoneNumber, char* name);
-void removeContact(File* file, char* phoneNumber);
-void editContact(File* file, char* phoneNumber, char* newPhoneNumber, char* newName);
-char* getName(File* file, char* phoneNumber);
-void printContacts();
-
-
+void addContact(const char* fileName, Contact* contact);
+void removeContact(const char* fileName, const char* phoneNumber);
+void editContact(const char* fileName, const char* phoneNumber, const char* newPhoneNumber, const char* newName);
+void printContacts(const char* fileName);
+void clearPhonebook(const char* fileName);
+int rowCount(const char* fileName);
+Contact* getContactsArray(const char* fileName);
+void sortContacts(const char* fileName);
 
 #endif
