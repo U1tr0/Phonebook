@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #ifndef PHONEBOOK
 #define PHONEBOOK 
 
@@ -17,5 +19,6 @@ void clearPhonebook(const char* fileName);
 int rowCount(const char* fileName);
 Contact* getContactsArray(const char* fileName);
 void sortContacts(const char* fileName);
+void checkFileExists(const FILE* file, const char* fileName);
 
 #endif

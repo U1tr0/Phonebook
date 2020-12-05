@@ -5,6 +5,7 @@
 void addContact(const char* fileName, Contact* contact) {
     FILE* file = fopen(fileName, "ab");
     fwrite(contact, sizeof(Contact), 1, file);
+    fputc('\n', file);
     fclose(file);
 }
 
@@ -20,9 +21,6 @@ void printContacts(const char* fileName) {
 
 }
 
-void sortContacts(const char* fileName) {
-
-}
 
 void clearPhonebook(const char* fileName) {
     FILE* file = fopen(fileName, "wb");
@@ -31,15 +29,14 @@ void clearPhonebook(const char* fileName) {
 
 int rowCount(const char* fileName) {
     FILE* file = fopen(fileName, "rb");
-    if (!file) {
-        printf("%s does not exist!\n", fileName);
-        exit(1);
-    }
+    checkFileExists(file, fileName); // if file doesn't exist then exit(1);
     int count = 0;
     Contact temp;
     fread(&temp, sizeof(Contact), 1, file);
+    fgetc(file);
     while (!feof(file)) {
         fread(&temp, sizeof(Contact), 1, file);
+        fgetc(file);
         ++count;
     }
     fclose(file);
@@ -49,15 +46,23 @@ int rowCount(const char* fileName) {
 Contact* getContactsArray(const char* fileName) {
     int rows = rowCount(fileName);
     FILE* file = fopen(fileName, "rb");
-    if (!file) {
-        printf("%s does not exist!\n", fileName);
-        exit(1);
-    }
+    checkFileExists(file, fileName); // if file doesn't exist then exit(1);
     Contact* contactsArray = (Contact*) malloc(sizeof(Contact) * rows);
     for (int i = 0; i < rows; ++i) {
         fread(contactsArray + i, sizeof(Contact), 1, file);
+        fgetc(file);
     }
     fclose(file);
     return contactsArray;
 }
 
+void sortContacts(const char* fileName) {
+
+}
+
+void checkFileExists(const FILE* file, const char* fileName) {
+    if (!file) {
+        printf("%s does not exist!\n", fileName);
+        exit(1);
+    }
+}
