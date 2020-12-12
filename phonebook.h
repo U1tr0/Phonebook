@@ -6,15 +6,15 @@
 #define NameBufferSize 30
 #define NumberBufferSize 20
 
-typedef enum {
-    WithoutSorting,
-    WithSorting,
-} SortParam; 
-
 typedef struct {
     char name[NameBufferSize];
     char number[NumberBufferSize];
 } Contact;
+
+typedef enum {
+    WithoutSorting,
+    WithSorting,
+} SortParam; 
 
 void addContact(const char* fileName, Contact* contact, SortParam param);
 void removeContact(const char* fileName, const char* phoneNumber);

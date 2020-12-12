@@ -22,10 +22,11 @@ int main() {
         if (operation == 'p') {
         int rows = countContacts(fileName);
         Contact* contacts = getContacts(fileName);
-            for (int i = 0; i < rows; ++i) {
+            /*for (int i = 0; i < rows; ++i) {
                 printf("%s %s\n", contacts[i].name, contacts[i].number);
             }
             free(contacts);
+            */
         //    printContacts(fileName);
         }
         else if (operation == 'w') {

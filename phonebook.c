@@ -5,7 +5,6 @@
 
 void addContact(const char* fileName, Contact* contact, SortParam param) {
     FILE* file = fopen(fileName, "ab");
-    //trimString(NameBufferSize, contact->name);
     // Write line in file. Format: "namenumber\n"
     fwrite(contact, sizeof(Contact), 1, file);
     fputc('\n', file);
@@ -46,7 +45,6 @@ void editContact(const char* fileName,
      * write contacts in file: addContact(...);
     */
     fclose(file);
-    //trimString(NameBufferSize, newContact->name);
     // here you should write contacts in file 
 }
 
