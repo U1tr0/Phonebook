@@ -6,7 +6,6 @@ int main() {
     char fileName[30];
     printf("Enter a file name: ");
     scanf("%s", fileName);
-    printf("%s\n", fileName);
     char ch;
     ch = fgetc(stdin);
     char operation;
@@ -21,8 +20,8 @@ int main() {
         operation = fgetc(stdin);
         ch = fgetc(stdin);
         if (operation == 'p') {
-        int rows = rowCount(fileName);
-        Contact* contacts = getContactsArray(fileName);
+        int rows = countContacts(fileName);
+        Contact* contacts = getContacts(fileName);
             for (int i = 0; i < rows; ++i) {
                 printf("%s %s\n", contacts[i].name, contacts[i].number);
             }
@@ -37,7 +36,7 @@ int main() {
             printf("Enter phone number: "); 
             scanf("%s", contact.number);
             ch = fgetc(stdin);
-            addContact(fileName, &contact);
+            addContact(fileName, &contact, WithSorting);
         }
         else if (operation == 'e') {
             Contact contact;
