@@ -20,14 +20,7 @@ int main() {
         operation = fgetc(stdin);
         ch = fgetc(stdin);
         if (operation == 'p') {
-        int rows = countContacts(fileName);
-        Contact* contacts = getContacts(fileName);
-            /*for (int i = 0; i < rows; ++i) {
-                printf("%s %s\n", contacts[i].name, contacts[i].number);
-            }
-            free(contacts);
-            */
-        //    printContacts(fileName);
+            printContacts(fileName);
         }
         else if (operation == 'w') {
             Contact contact;
@@ -51,7 +44,7 @@ int main() {
             printf("Enter new name ");
             scanf("%s", contact.name);
             ch = fgetc(stdin);
-            //editContact(fileName, oldNumber, contact);
+            editContact(fileName, oldNumber, &contact);
         }
         else if (operation == 'r') {
             char phoneNumber[NumberBufferSize];

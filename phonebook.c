@@ -9,7 +9,7 @@ void addContact(const char* fileName, Contact* contact, SortParam param) {
     fwrite(contact, sizeof(Contact), 1, file);
     fputc('\n', file);
     if (param == WithSorting) {
-        //sortContacts(fileName);
+        sortContacts(fileName);
     }
     fclose(file);
 }
@@ -38,24 +38,22 @@ void editContact(const char* fileName,
 {
     FILE* file = fopen(fileName, "rb");
     checkFileExists(file, fileName);
-    /*
-     * get contacts array: getContacts(fileName);
-     * search contact in array
-     * change contact name and phone
-     * write contacts in file: addContact(...);
-    */
     fclose(file);
-    // here you should write contacts in file 
+    removeContact(fileName, phoneNumber);
+    addContact(fileName, newContact, WithSorting);
 }
 
 // Prints sorted array of contacts
 void printContacts(const char* fileName) {
     FILE* file = fopen(fileName, "rb");
     checkFileExists(file, fileName);
-    /* 
-     * get array of contacts
-     * print array
-    */
+    sortContacts(fileName);
+    int rows = countContacts(fileName);
+    Contact* contacts = getContacts(fileName);
+    for (int i = 0; i < rows; ++i) {
+        printf("%s %s\n", contacts[i].name, contacts[i].number);
+    }
+    
     fclose(file);
 }
 
@@ -101,11 +99,23 @@ Contact* getContacts(const char* fileName) {
 }
 
 void sortContacts(const char* fileName) {
-    /*
-     * get array contacts: getContacts(fileName);
-     * sort array
-     * write each contact from array in file: addContact(...);
-    */
+    Contact* contacts = getContacts(fileName);
+    int rows = countContacts(fileName);
+    clearPhonebook(fileName);
+    Contact temp;
+    for (int j = rows - 1; j > 0; j--) {
+        for (int i = 0; i < j; i++) {
+            if (strcmp(contacts[i].name, contacts[i + 1].name) > 0) {
+                temp = contacts[i];
+                contacts[i] = contacts[i + 1];
+                contacts[i + 1] = temp;
+            }
+        }
+    }
+
+    for (int i = 0; i < rows; ++i) {
+        addContact(fileName, contacts + i, WithoutSorting);
+    }
 }
 
 // Checks file. If file does not exists, then terminate program
