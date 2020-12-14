@@ -3,7 +3,10 @@
 #include <stdio.h>
 #include <string.h>
 
-void addContact(const char* fileName, const Contact* contact, const SortParam param) {
+void addContact(const char* fileName,
+                const Contact* contact,
+                const SortParam param)
+{
     FILE* file = fopen(fileName, "ab");
     // Write line in file. Format: "namenumber\n"
     fwrite(contact, sizeof(Contact), 1, file);

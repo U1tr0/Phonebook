@@ -3,7 +3,7 @@
 #ifndef PHONEBOOK
 #define PHONEBOOK 
 
-#define NameBufferSize 30
+#define NameBufferSize 50
 #define NumberBufferSize 20
 
 typedef struct {
@@ -16,7 +16,9 @@ typedef enum {
     WithSorting,
 } SortParam; 
 
-void addContact(const char* fileName, const Contact* contact, const SortParam param);
+void addContact(const char* fileName,
+                const Contact* contact,
+                const SortParam param);
 void removeContact(const char* fileName, const char* phoneNumber);
 void editContact(const char* fileName,
                  const char* phoneNumber,
